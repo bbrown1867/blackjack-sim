@@ -1,4 +1,4 @@
-"""Blackjack strategy implementations."""
+"""Blackjack strategy implementations"""
 
 import logging
 import re

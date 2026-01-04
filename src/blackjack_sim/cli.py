@@ -1,4 +1,4 @@
-"""Command-line interface."""
+"""Command-line interface"""
 
 import logging
 from dataclasses import dataclass

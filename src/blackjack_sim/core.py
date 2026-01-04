@@ -1,4 +1,4 @@
-"""Core blackjack classes."""
+"""Core blackjack classes"""
 
 from dataclasses import dataclass
 from enum import StrEnum

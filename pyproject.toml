@@ -3,9 +3,7 @@ name = "blackjack-sim"
 version = "0.1.0"
 description = "Interactive blackjack simulator"
 package-data = {blackjack_sim = ["py.typed"]}
-authors = [
-    { name = "Ben Brown" }
-]
+authors = [{ name = "Ben Brown" }]
 requires-python = ">=3.12"
 dependencies = [
     "rich>=14.2.0",

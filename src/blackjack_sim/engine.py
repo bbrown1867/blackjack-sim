@@ -1,4 +1,4 @@
-"""Blackjack game engine.
+"""Blackjack game engine
 
 Common rule variations can be adjusted with the ``GameOptions()`` class.
 Game engine behavior that is not currently configurable:
@@ -69,6 +69,7 @@ class GameOptions:
 
 class Game:
     def __init__(self, options: Optional[GameOptions] = None):
+        # Game config
         self._options = GameOptions() if not options else options
 
         # Game state
@@ -109,7 +110,7 @@ class Game:
                 if hand.can_split() and (num_split < self._options.max_split):
                     actions.append(Action.SPLIT)
 
-        action = strategy.get_action(hand, actions, self._upcard)
+        action = strategy.get_action(hand, actions, upcard=self._upcard)
         assert action in actions, f"Invalid action: {action}"
 
         if action == Action.HIT:
@@ -131,6 +132,7 @@ class Game:
                 new_hand = Hand([hand[i]], name=f"{hand.name} Split {i + 1}", wager=bet)
                 self._draw_card(new_hand)
                 if hand.has_ace():
+                    # Game rule: Must stand after splitting Aces
                     new_hands.append(new_hand)
                 else:
                     new_hands += self._play_hand(strategy, new_hand, bet, num_split + 1)
