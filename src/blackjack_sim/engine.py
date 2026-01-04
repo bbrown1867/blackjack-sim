@@ -1,13 +1,4 @@
-"""Blackjack game engine
-
-Common rule variations can be adjusted with the ``GameOptions()`` class.
-Game engine behavior that is not currently configurable:
-    - One player against the dealer
-    - Must stand after splitting Aces
-    - Natural blackjack is checked before any play, meaning:
-        - No early surrender
-        - Only original bets lost on dealer blackjack
-"""
+"""Blackjack game engine"""
 
 import random
 from dataclasses import dataclass
@@ -144,27 +135,25 @@ class Game:
 
         return [hand]
 
-    def _compare_hands(self, player_hand: Hand, dealer_hand: Hand) -> float:
+    def _compare_hands(self, player_hand: Hand, dealer_hand: Hand):
         assert self._strategy
 
         if player_hand.is_bust():
             self._strategy.show_result(player_hand, "Player bust")
-            return 0.0
         elif dealer_hand.is_bust():
             self._strategy.show_result(player_hand, "Dealer bust")
-            return 2.0 * player_hand.wager
+            self._bankroll += 2.0 * player_hand.wager
         else:
             pv = player_hand.value()
             dv = dealer_hand.value()
             if pv > dv:
                 self._strategy.show_result(player_hand, f"Player wins ({pv} > {dv})")
-                return 2.0 * player_hand.wager
+                self._bankroll += 2.0 * player_hand.wager
             elif pv == dv:
                 self._strategy.show_result(player_hand, f"Push ({pv} = {dv})")
-                return player_hand.wager
+                self._bankroll += player_hand.wager
             else:
                 self._strategy.show_result(player_hand, f"Dealer wins ({pv} < {dv})")
-                return 0.0
 
     def _play_round(self, bet: int):
         assert self._strategy
@@ -181,7 +170,7 @@ class Game:
         if player_hand.is_blackjack() or dealer_hand.is_blackjack():
             self._strategy.show_hand(dealer_hand)
             if player_hand.is_blackjack() and dealer_hand.is_blackjack():
-                self._strategy.show_result(player_hand, "Push")
+                self._strategy.show_result(player_hand, "Push (blackjack)")
                 self._bankroll += bet
             elif player_hand.is_blackjack() and not dealer_hand.is_blackjack():
                 self._strategy.show_result(player_hand, "Player has blackjack")
@@ -206,7 +195,7 @@ class Game:
 
                 # Compare outcomes, adjust bankroll (no change if dealer wins)
                 for player_hand in player_hands:
-                    self._bankroll += self._compare_hands(player_hand, dealer_hand)
+                    self._compare_hands(player_hand, dealer_hand)
 
     def play(self, strategy: Strategy, bankroll: int):
         self._bankroll = bankroll

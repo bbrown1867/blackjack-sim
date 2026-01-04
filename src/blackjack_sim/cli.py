@@ -86,7 +86,7 @@ def simulate(
 
         avg_ev += ev
 
-    logger.info(f"Bankruptcy Chance: {(num_bankrupt / num_games) * 100.0:.2f}%")
+    logger.info(f"Risk of Ruin: {(num_bankrupt / num_games) * 100.0:.2f}%")
     logger.info(f"House Edge: {-100.0 * (avg_ev / num_games):.2f}%")
 
 

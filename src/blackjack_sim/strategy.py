@@ -11,26 +11,58 @@ logger = logging.getLogger(__name__)
 
 
 class Strategy:
-    """Interface between game engine and strategy implementations."""
+    """Interface between game engine and strategy implementations"""
 
     def show_hand(self, hand: Hand):
+        """Called when a hand is updated with a new, visible card.
+
+        Args:
+            hand: Hand that changed.
+        """
         pass
 
     def show_result(self, hand: Hand, result: str):
+        """Called when a hand is finished.
+
+        Args:
+            hand: Hand that finished.
+            result: Description of hand result.
+        """
         pass
 
     def get_bet(self, min_bet: int, bankroll: int) -> Optional[int]:
-        """Return ``None`` to  terminate the game."""
+        """Adjust the bet for the upcoming round of play.
+
+        Args:
+            min_bet: Minimum bet.
+            bankroll: Current bankroll.
+
+        Returns:
+            New bet, which must be greater than or equal to the minimum
+            bet and less than or equal to the bankroll. Return ``None``
+            to terminate the game.
+        """
         return min_bet
 
     @abstractmethod
     def get_action(
         self, hand: Hand, actions: List[Action], upcard: Optional[int] = None
-    ) -> Action: ...
+    ) -> Action:
+        """Specify what action to take during a hand of blackjack.
+
+        Args:
+            hand: Current hand being played.
+            actions: List of available actions.
+            upcard: Dealer upcard.
+
+        Return:
+            Next action, which must be in the list of provided actions.
+        """
+        ...
 
 
 class Manual(Strategy):
-    """Prompt user for strategy decisions."""
+    """Prompt user for strategy decisions"""
 
     _GET_BET_PROMPT = "Provide new bet or hit ENTER to use same bet (CTRL-C to quit)"
 
@@ -85,7 +117,7 @@ class Manual(Strategy):
 
 
 class Training(Manual):
-    """Manual strategy with comparison to an automated strategy."""
+    """Manual strategy with comparison to an automated strategy"""
 
     def __init__(self, strategy: Strategy):
         self._other = strategy
@@ -105,7 +137,7 @@ class Training(Manual):
 
 
 class Dealer(Strategy):
-    """Hit until 17, with an option to hit or stand on soft 17."""
+    """Hit until 17, with an option to hit or stand on soft 17"""
 
     def __init__(self, hit_soft_seventeen: bool):
         self._hit_soft_seventeen = hit_soft_seventeen
@@ -139,7 +171,7 @@ class AlwaysHit(Strategy):
 
 
 class Basic(Strategy):
-    """Basic strategy makes the optimal player decision for every hand.
+    """Basic strategy makes the optimal player decision for every hand
 
     Adjustment for rule variations is not supported. The strategy assumes
     the default rule set from ``GameOptions()``. Implementation reference:
@@ -173,7 +205,6 @@ class Basic(Strategy):
     def _handle_split(
         player: int, dealer: int, can_surrender: bool, can_double: bool
     ) -> Action:
-        """Argument "player" is the value of one card in the pair."""
         if player == 11:
             return Action.SPLIT
         elif player == 10:
@@ -203,7 +234,6 @@ class Basic(Strategy):
 
     @staticmethod
     def _handle_soft_total(player: int, dealer: int, can_double: bool) -> Action:
-        """Argument "player" is the value of the non-Ace in the hand of 2 cards."""
         if player == 11:
             # Ace pair that can't be split (e.g. max split reached)
             return Action.DOUBLE if can_double and (dealer == 6) else Action.HIT
@@ -234,7 +264,6 @@ class Basic(Strategy):
     def _handle_hard_total(
         player: int, dealer: int, can_surrender: bool, can_double: bool
     ) -> Action:
-        """Argument "player" is the hard total of the hand."""
         if player >= 18:
             return Action.STAND
         elif player == 17:

@@ -68,48 +68,68 @@ def test_game_play_hand_max_split():
 
 def test_game_compare_hands_player_bust():
     bet = 10
+    bankroll = 100
     player_hand = Hand(
         [make_face_card(), make_face_card(), make_face_card()], wager=bet
     )
     game = Game()
+    game._bankroll = bankroll
     game._strategy = MagicMock()
-    assert game._compare_hands(player_hand, MagicMock()) == 0.0
+    game._make_bet(bet)
+    game._compare_hands(player_hand, MagicMock())
+    assert game._bankroll == (bankroll - bet)
 
 
 def test_game_compare_hands_dealer_bust():
     bet = 10
+    bankroll = 100
     player_hand = Hand([make_low_card(3), make_low_card(2)], wager=bet)
     dealer_hand = Hand([make_face_card(), make_face_card(), make_face_card()])
     game = Game()
+    game._bankroll = bankroll
     game._strategy = MagicMock()
-    assert game._compare_hands(player_hand, dealer_hand) == (2.0 * bet)
+    game._make_bet(bet)
+    game._compare_hands(player_hand, dealer_hand)
+    assert game._bankroll == (bankroll + bet)
 
 
 def test_game_compare_hands_player_win():
     bet = 10
+    bankroll = 100
     player_hand = Hand([make_low_card(3), make_low_card(2)], wager=bet)
     dealer_hand = Hand([make_low_card(2), make_low_card(2)])
     game = Game()
+    game._bankroll = bankroll
     game._strategy = MagicMock()
-    assert game._compare_hands(player_hand, dealer_hand) == (2.0 * bet)
+    game._make_bet(bet)
+    game._compare_hands(player_hand, dealer_hand)
+    assert game._bankroll == (bankroll + bet)
 
 
 def test_game_compare_hands_dealer_win():
     bet = 10
+    bankroll = 100
     player_hand = Hand([make_low_card(2), make_low_card(2)], wager=bet)
     dealer_hand = Hand([make_low_card(3), make_low_card(2)])
     game = Game()
+    game._bankroll = bankroll
     game._strategy = MagicMock()
-    assert game._compare_hands(player_hand, dealer_hand) == 0.0
+    game._make_bet(bet)
+    game._compare_hands(player_hand, dealer_hand)
+    assert game._bankroll == (bankroll - bet)
 
 
 def test_game_compare_hands_push():
     bet = 10
+    bankroll = 100
     player_hand = Hand([make_low_card(3), make_low_card(2)], wager=bet)
     dealer_hand = Hand([make_low_card(3), make_low_card(2)])
     game = Game()
+    game._bankroll = bankroll
     game._strategy = MagicMock()
-    assert game._compare_hands(player_hand, dealer_hand) == bet
+    game._make_bet(bet)
+    game._compare_hands(player_hand, dealer_hand)
+    assert game._bankroll == bankroll
 
 
 def test_game_play_round_player_blackjack():
