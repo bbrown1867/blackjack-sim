@@ -27,7 +27,3 @@ dev = [
     "ruff",
     "ty",
 ]
-
-[tool.ty.rules]
-# FIXME: Default values in cli.py::common_options() cause type confusion
-invalid-parameter-default = "ignore"

@@ -52,7 +52,7 @@ class GameOptions:
     payout: float = 1.5
     num_decks: int = 6
     shoe_min_percent: float = 20.0
-    hit_soft_seventeen: bool = True
+    hit_soft_seventeen: bool = False
     double_after_split: bool = True
     late_surrender: bool = True
     max_split: int = 2

@@ -146,11 +146,9 @@ class Dealer(Strategy):
         assert (Action.HIT in actions) and (Action.STAND in actions)
         assert not (hand.is_bust() or hand.is_blackjack())
 
-        if hand.value() < 17:
-            return Action.HIT
-        elif hand.value() > 17:
-            return Action.STAND
-        elif hand.is_soft() and self._hit_soft_seventeen:
+        if hand.is_soft() and hand.value() == 17:
+            return Action.HIT if self._hit_soft_seventeen else Action.STAND
+        elif hand.value() < 17:
             return Action.HIT
         else:
             return Action.STAND

@@ -91,32 +91,32 @@ def simulate(
 
 
 @app.callback()
-def common_options(
+def common_options(  # ty: ignore[invalid-parameter-default]
     ctx: typer.Context,
     bet: Annotated[
         int, typer.Option(help="Minumum bet")
-    ] = GameOptions.__dataclass_fields__["min_bet"].default,
+    ] = GameOptions.__dataclass_fields__["min_bet"].default,  # ty: ignore[invalid-parameter-default]
     payout: Annotated[
         float, typer.Option(help="Payout for natural blackjack")
-    ] = GameOptions.__dataclass_fields__["payout"].default,
+    ] = GameOptions.__dataclass_fields__["payout"].default,  # ty: ignore[invalid-parameter-default]
     num_decks: Annotated[
         int, typer.Option(help="Number of 52 card decks in a shoe")
-    ] = GameOptions.__dataclass_fields__["num_decks"].default,
+    ] = GameOptions.__dataclass_fields__["num_decks"].default,  # ty: ignore[invalid-parameter-default]
     shoe_min_percent: Annotated[
         float, typer.Option(help="Percent of shoe remaining when game ends")
-    ] = GameOptions.__dataclass_fields__["shoe_min_percent"].default,
+    ] = GameOptions.__dataclass_fields__["shoe_min_percent"].default,  # ty: ignore[invalid-parameter-default]
     hit_soft_seventeen: Annotated[
         bool, typer.Option(help="Dealer hits or stands on soft seventeen")
-    ] = GameOptions.__dataclass_fields__["hit_soft_seventeen"].default,
+    ] = GameOptions.__dataclass_fields__["hit_soft_seventeen"].default,  # ty: ignore[invalid-parameter-default]
     double_after_split: Annotated[
         bool, typer.Option(help="Double after split allowed or disallowed")
-    ] = GameOptions.__dataclass_fields__["double_after_split"].default,
+    ] = GameOptions.__dataclass_fields__["double_after_split"].default,  # ty: ignore[invalid-parameter-default]
     late_surrender: Annotated[
         bool, typer.Option(help="Late surrender allowed or disallowed")
-    ] = GameOptions.__dataclass_fields__["late_surrender"].default,
+    ] = GameOptions.__dataclass_fields__["late_surrender"].default,  # ty: ignore[invalid-parameter-default]
     max_split: Annotated[
         int, typer.Option(help="Max number of splits allowed (2 splits = 4 hands)")
-    ] = GameOptions.__dataclass_fields__["max_split"].default,
+    ] = GameOptions.__dataclass_fields__["max_split"].default,  # ty: ignore[invalid-parameter-default]
     bankroll: Annotated[int, typer.Option(help="Player bankroll")] = 500,
 ):
     logging.basicConfig(format="", level=logging.INFO)

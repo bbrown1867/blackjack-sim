@@ -21,22 +21,22 @@ class. All of these options are also available on the command-line.
 
      Usage: blackjack [OPTIONS] COMMAND [ARGS]...
 
-    ╭─ Options ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ --bet                                              INTEGER  Minumum bet [default: 10]                                               │
-    │ --payout                                           FLOAT    Payout for natural blackjack [default: 1.5]                             │
-    │ --num-decks                                        INTEGER  Number of 52 card decks in a shoe [default: 6]                          │
-    │ --shoe-min-percent                                 FLOAT    Percent of shoe remaining when game ends [default: 20.0]                │
-    │ --hit-soft-seventeen    --no-hit-soft-seventeen             Dealer hits or stands on soft seventeen [default: hit-soft-seventeen]   │
-    │ --double-after-split    --no-double-after-split             Double after split allowed or disallowed [default: double-after-split]  │
-    │ --late-surrender        --no-late-surrender                 Late surrender allowed or disallowed [default: late-surrender]          │
-    │ --max-split                                        INTEGER  Max number of splits allowed (2 splits = 4 hands) [default: 2]          │
-    │ --bankroll                                         INTEGER  Player bankroll [default: 500]                                          │
-    │ --help                                                      Show this message and exit.                                             │
-    ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
-    ╭─ Commands ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-    │ play       Play blackjack!                                                                                                          │
-    │ simulate   Simulate many blackjack games to evaluate a strategy.                                                                    │
-    ╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Options ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ --bet                                              INTEGER  Minumum bet [default: 10]                                                │
+    │ --payout                                           FLOAT    Payout for natural blackjack [default: 1.5]                              │
+    │ --num-decks                                        INTEGER  Number of 52 card decks in a shoe [default: 6]                           │
+    │ --shoe-min-percent                                 FLOAT    Percent of shoe remaining when game ends [default: 20.0]                 │
+    │ --hit-soft-seventeen    --no-hit-soft-seventeen             Dealer hits or stands on soft seventeen [default: no-hit-soft-seventeen] │
+    │ --double-after-split    --no-double-after-split             Double after split allowed or disallowed [default: double-after-split]   │
+    │ --late-surrender        --no-late-surrender                 Late surrender allowed or disallowed [default: late-surrender]           │
+    │ --max-split                                        INTEGER  Max number of splits allowed (2 splits = 4 hands) [default: 2]           │
+    │ --bankroll                                         INTEGER  Player bankroll [default: 500]                                           │
+    │ --help                                                      Show this message and exit.                                              │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+    ╭─ Commands ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+    │ play       Play blackjack                                                                                                            │
+    │ simulate   Simulate many blackjack games to evaluate a strategy                                                                      │
+    ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 
 The following game engine behavior is not configurable:
 
