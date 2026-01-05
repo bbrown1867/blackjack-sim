@@ -41,7 +41,7 @@ def play(
         typer.Option(case_sensitive=False, help="Training strategy"),
     ] = None,
 ):
-    """Play blackjack!
+    """Play blackjack
 
     User is prompted for betting and strategy decisions. The game ends when the
     user quits, goes bankrupt, or the shoe is out of cards, which is defined by
@@ -73,7 +73,7 @@ def simulate(
         int, typer.Option(help="Number of games to simulate")
     ] = 1000000,
 ):
-    """Simulate many blackjack games to evaluate a strategy."""
+    """Simulate many blackjack games to evaluate a strategy"""
     strategy_cls = _STRATEGY_MAP[player_strategy]
 
     avg_ev = 0.0
