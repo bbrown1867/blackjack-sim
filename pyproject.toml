@@ -9,6 +9,7 @@ readme-content-type = "text/markdown"
 requires-python = ">=3.12"
 dependencies = [
     "rich>=14.2.0",
+    "textual>=7.0.0",
     "typer>=0.21.0",
 ]
 
@@ -25,6 +26,7 @@ dev = [
     "jedi-language-server",
     "pytest",
     "ruff",
+    "textual-dev",
     "ty",
 ]
 
