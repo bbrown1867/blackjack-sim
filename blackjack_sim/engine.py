@@ -64,7 +64,7 @@ class Game:
         self._options = GameOptions() if not options else options
 
         # Game state
-        self._bankroll = 0
+        self._bankroll = 0.0
         self._total_bet = 0
         self._shoe: Optional[Shoe] = None
         self._strategy: Optional[Strategy] = None
