@@ -2,7 +2,7 @@
 
 import random
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 from .core import Action, Card, Hand
 from .strategy import Dealer, Strategy
@@ -197,7 +197,7 @@ class Game:
                 for player_hand in player_hands:
                     self._compare_hands(player_hand, dealer_hand)
 
-    def play(self, strategy: Strategy, bankroll: int):
+    def play(self, strategy: Strategy, bankroll: int) -> Tuple[float, float]:
         self._bankroll = bankroll
         self._total_bet = 0
         self._shoe = Shoe(self._options.num_decks)
