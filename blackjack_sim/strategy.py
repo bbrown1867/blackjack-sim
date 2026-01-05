@@ -14,33 +14,31 @@ class Strategy:
     """Interface between game engine and strategy implementations"""
 
     def show_hand(self, hand: Hand):
-        """Called when a hand is updated with a new, visible card.
+        """Called when a hand is updated with a new, visible card
 
         Args:
-            hand: Hand that changed.
+            hand: Hand that changed
         """
         pass
 
     def show_result(self, hand: Hand, result: str):
-        """Called when a hand is finished.
+        """Called when a hand is finished
 
         Args:
-            hand: Hand that finished.
-            result: Description of hand result.
+            hand: Hand that finished
+            result: Description of hand result
         """
         pass
 
     def get_bet(self, min_bet: int, bankroll: int) -> Optional[int]:
-        """Adjust the bet for the upcoming round of play.
+        """Adjust the bet for the upcoming round of play
 
         Args:
-            min_bet: Minimum bet.
-            bankroll: Current bankroll.
+            min_bet: Minimum bet
+            bankroll: Current bankroll
 
         Returns:
-            New bet, which must be greater than or equal to the minimum
-            bet and less than or equal to the bankroll. Return ``None``
-            to terminate the game.
+            New bet or `None` to terminate the game
         """
         return min_bet
 
@@ -48,15 +46,15 @@ class Strategy:
     def get_action(
         self, hand: Hand, actions: List[Action], upcard: Optional[int] = None
     ) -> Action:
-        """Specify what action to take during a hand of blackjack.
+        """Specify what action to take during a hand of blackjack
 
         Args:
-            hand: Current hand being played.
-            actions: List of available actions.
-            upcard: Dealer upcard.
+            hand: Current hand being played
+            actions: List of available actions
+            upcard: Dealer upcard
 
         Return:
-            Next action, which must be in the list of provided actions.
+            Next action
         """
         ...
 
@@ -176,8 +174,6 @@ class Basic(Strategy):
     Adjustment for rule variations is not supported. The strategy assumes
     the default rule set from ``GameOptions()``. Implementation reference:
     <https://en.wikipedia.org/wiki/Blackjack#Basic_strategy>
-
-    Implementation is basically a big look-up table.
     """
 
     def get_action(
