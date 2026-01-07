@@ -11,9 +11,9 @@ from rich.progress import track
 from .engine import Game, GameOptions
 from .strategy import AlwaysHit, Basic, Manual, Training
 
-app = typer.Typer(add_completion=False)
-
 logger = logging.getLogger(__name__)
+
+app = typer.Typer(add_completion=False)
 
 
 @dataclass

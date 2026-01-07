@@ -41,7 +41,7 @@ class Hand(List[Card]):
         return self._name
 
     @property
-    def wager(self) -> float:
+    def wager(self) -> int:
         return self._wager
 
     def _value(self) -> Tuple[int, bool]:

@@ -94,11 +94,11 @@ class Manual(Strategy):
 
         get_action_prompt = " ".join([str(a) for a in actions])
         while True:
-            move_str = input(f"{get_action_prompt}\n").strip().lower()
+            action_str = input(f"{get_action_prompt}\n").strip().lower()
             for action in actions:
                 long_form = self._get_action_str_long_form(action)
                 short_form = self._get_action_str_short_form(action)
-                if move_str in [long_form, short_form]:
+                if action_str in [long_form, short_form]:
                     return action
 
             logger.error("Invalid input, try again")
